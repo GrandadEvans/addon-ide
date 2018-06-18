@@ -9,8 +9,8 @@ source /usr/lib/hassio-addons/base.sh
 readonly -a directories=(addons backup config share ssl)
 
 for dir in "${directories[@]}"; do
-    ln -s "/${dir}" "/workspace/${dir}" \
-        || hass.log.warning "Failed linking common directory: ${dir}"
+    mount --bind "/${dir}" "/workspace/${dir}" \
+        || hass.log.warning "Failed mounting common directory: ${dir}"
 done
 
 # Symlink workspace setting to data folder
